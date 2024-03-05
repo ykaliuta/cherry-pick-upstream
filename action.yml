@@ -1,0 +1,28 @@
+name: Cherry pick upstream commits to your downstream branch
+description: Cherry pick upstream commits to your downstream branch.
+author: ykaliuta
+
+inputs:
+  upstream_branch:
+    description: Source branch
+    required: false
+    default: "main"
+  downstream_branch:
+    description: Destination branch
+    required: false
+    default: ""
+  exclude_file:
+    description: File with exclude patterns for filterdiff -X
+    required: false
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.upstream_branch }}
+    - ${{ inputs.downstream_branch }}
+    - ${{ inputs.exclude_file }}
+
+branding:
+  icon: "git-merge"
+  color: "blue"
