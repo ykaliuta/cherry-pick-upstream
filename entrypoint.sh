@@ -38,8 +38,9 @@ cherry_pick_commit()
 
     git format-patch -1 --stdout --no-prefix $commit | \
         filterdiff $exclude_arg | \
-        git apply -p0 --index --whitespace=warn -
-    make_message $commit | git commit --author="$author" --date="$date" -F -
+        git apply -p0 --index --whitespace=warn --allow-empty -
+    make_message $commit | \
+        git commit --allow-empty --author="$author" --date="$date" -F -
 }
 
 upstream_from_cherry_pick()
